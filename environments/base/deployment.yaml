@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: link-shortener-backend
+  labels:
+    app: link-shortener-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: link-shortener-backend
+  template:
+    metadata:
+      labels:
+        app: link-shortener-backend
+    spec:
+      containers:
+      - name: backend
+        image: nginx:alpine # Şimdilik dummy imaj, CI bunu güncelleyecek
+        ports:
+        - containerPort: 80
