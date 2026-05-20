@@ -6,5 +6,5 @@ resources:
 
 images:
   - name: nginx
-    newName: nginx # Daha sonra AWS ECR URI'miz ile değiştireceğiz
-    newTag: alpine
+    newName: 189056847276.dkr.ecr.eu-central-1.amazonaws.com/link-shortener-backend
+    newTag: e5d623bd7e5e48f2451cd52b74ec3d15f082e5fd
