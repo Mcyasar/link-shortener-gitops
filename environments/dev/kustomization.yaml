@@ -6,5 +6,5 @@ resources:
 
 images:
   - name: link-shortener-backend # base'deki imaj adı ile BİREBİR aynı olmalı
-    newName: <AWS_ACCOUNT_ID>.dkr.ecr.eu-central-1.amazonaws.com/link-shortener-backend # Başlangıç için AWS ECR URI'niz
-    newTag: latest # GitHub Actions burayı dinamik olarak Commit SHA yapacak
+    newName: 189056847276.dkr.ecr.eu-central-1.amazonaws.com/link-shortener-backend
+    newTag: bb5dac86c38200f1777a31a7810c1e2d78bfdad1
