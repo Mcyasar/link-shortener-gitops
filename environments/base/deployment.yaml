@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: backend
-        image: nginx:alpine # Şimdilik dummy imaj, CI bunu güncelleyecek
+        image: link-shortener-backend
         ports:
-        - containerPort: 80
+        - containerPort: 8080 # .NET 8.0 varsayılan olarak 8080 portunu dinler, hazır buradayken bunu da güncelleyelim.

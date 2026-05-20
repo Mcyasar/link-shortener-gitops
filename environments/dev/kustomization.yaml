@@ -5,6 +5,6 @@ resources:
   - ../base
 
 images:
-  - name: nginx
-    newName: 189056847276.dkr.ecr.eu-central-1.amazonaws.com/link-shortener-backend
-    newTag: e5d623bd7e5e48f2451cd52b74ec3d15f082e5fd
+  - name: link-shortener-backend # base'deki imaj adı ile BİREBİR aynı olmalı
+    newName: <AWS_ACCOUNT_ID>.dkr.ecr.eu-central-1.amazonaws.com/link-shortener-backend # Başlangıç için AWS ECR URI'niz
+    newTag: latest # GitHub Actions burayı dinamik olarak Commit SHA yapacak
