@@ -61,6 +61,10 @@ spec:
             configMapKeyRef:
               name: link-shortener-config
               key: AWS__Region
+        - name: AWS_SECRET_ACCESS_KEY
+          value: "fakeSecretAccessKey"
+        - name: AWS_ACCESS_KEY_ID
+          value: "fakeMyKeyId"             # 👈 Tamamen rastgele bir değer olabilir
         # Liveness ve Readiness Probları (Uygulamanızda /health endpoint'i olduğunu varsayar)
         livenessProbe:
           tcpSocket:                        # 👈 Aynı şekilde liveness probe için de TCP kontrolü
