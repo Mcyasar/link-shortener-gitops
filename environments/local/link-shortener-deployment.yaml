@@ -19,7 +19,7 @@ spec:
       - name: link-shortener-api
         image: link-shortener-backend:latest # Kendi Docker imajınızla güncelleyin
         ports:
-        - containerPort: 80
+        - containerPort: 5188 # 👈 .NET uygulamanızın asıl portu
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: Production # Kubernetes ortamında Production olarak çalıştırın
@@ -60,14 +60,12 @@ spec:
               key: AWS__Region
         # Liveness ve Readiness Probları (Uygulamanızda /health endpoint'i olduğunu varsayar)
         livenessProbe:
-          httpGet:
-            path: /health
-            port: 80
-          initialDelaySeconds: 30
-          periodSeconds: 10
+          tcpSocket:                        # 👈 Aynı şekilde liveness probe için de TCP kontrolü
+            port: 5188
+          initialDelaySeconds: 10
+          periodSeconds: 20
         readinessProbe:
-          httpGet:
-            path: /health
-            port: 80
-          initialDelaySeconds: 15
-          periodSeconds: 5
+          tcpSocket:                        # 👈 HTTP yerine tcpSocket kullanıyoruz
+            port: 5188                      # 👈 LaunchSettings'teki port değeri
+          initialDelaySeconds: 5            # .NET ayağa kalkarken Kestrel'e tanınan süre
+          periodSeconds: 10
