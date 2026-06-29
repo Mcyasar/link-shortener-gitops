@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: link-shortener-api
+  namespace: link-shortener
+  labels:
+    app: link-shortener-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: link-shortener-api
+  template:
+    metadata:
+      labels:
+        app: link-shortener-api
+    spec:
+      containers:
+      - name: link-shortener-api
+        image: mcysrdckr/link_shortener/link-shortener-backend:latest # Kendi Docker imajınızla güncelleyin
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Production # Kubernetes ortamında Production olarak çalıştırın
+        - name: ConnectionStrings__PostgreSQL
+          valueFrom:
+            secretKeyRef:
+              name: link-shortener-secrets
+              key: ConnectionStrings__PostgreSQL
+        - name: ConnectionStrings__Redis
+          valueFrom:
+            secretKeyRef:
+              name: link-shortener-secrets
+              key: ConnectionStrings__Redis
+        - name: JwtSettings__Secret
+          valueFrom:
+            secretKeyRef:
+              name: link-shortener-secrets
+              key: JwtSettings__Secret
+        - name: JwtSettings__Issuer
+          valueFrom:
+            configMapKeyRef:
+              name: link-shortener-config
+              key: JwtSettings__Issuer
+        - name: JwtSettings__Audience
+          valueFrom:
+            configMapKeyRef:
+              name: link-shortener-config
+              key: JwtSettings__Audience
+        - name: JwtSettings__ExpiryInMinutes
+          valueFrom:
+            configMapKeyRef:
+              name: link-shortener-config
+              key: JwtSettings__ExpiryInMinutes
+        - name: AWS__Region
+          valueFrom:
+            configMapKeyRef:
+              name: link-shortener-config
+              key: AWS__Region
+        # Liveness ve Readiness Probları (Uygulamanızda /health endpoint'i olduğunu varsayar)
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 5

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: link-shortener-api-service
+  namespace: link-shortener
+spec:
+  selector:
+    app: link-shortener-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP # Cluster içinde erişim için ClusterIP

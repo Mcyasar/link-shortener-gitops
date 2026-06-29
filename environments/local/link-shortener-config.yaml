@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: link-shortener-config
+  namespace: link-shortener
+data:
+  JwtSettings__Issuer: LinkShortenerAPI
+  JwtSettings__Audience: LinkShortenerClient
+  JwtSettings__ExpiryInMinutes: "60"
+  AWS__Region: eu-central-1

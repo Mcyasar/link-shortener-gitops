@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: link-shortener-dev
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/Mcyasar/link-shortener-gitops.git'
+    targetRevision: HEAD
+    path: environments/dev # Yeni oluşturduğumuz local ortamı hedefliyoruz
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: dev # Uygulamanın dağıtılacağı namespace (isteğe bağlı olarak değiştirebilirsiniz)
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true # Eğer namespace yoksa otomatik oluştur

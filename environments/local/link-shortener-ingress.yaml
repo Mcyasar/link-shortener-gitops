@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: link-shortener-ingress
+  namespace: link-shortener
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: / # Eğer uygulamanız root path'te çalışıyorsa
+spec:
+  ingressClassName: nginx # Docker Desktop'ta genellikle 'nginx' veya 'traefik'
+  rules:
+  - host: linkshortener.local # Kendi istediğiniz bir hostname belirleyin
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: link-shortener-api-service
+            port:
+              number: 80
