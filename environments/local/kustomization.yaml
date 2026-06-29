@@ -11,5 +11,5 @@ resources:
 
 images:
   - name: link-shortener-backend
-    newName: mcysrdckr/link_shortener # Docker Hub repository'nizin tam adı
-    newTag: latest # Yerel ortamda genellikle 'latest' veya belirli bir versiyon kullanılır
+    newName: mcysrdckr/link_shortener
+    newTag: ee66c6e131704d1cdac7a317dd42228f74082d3a
