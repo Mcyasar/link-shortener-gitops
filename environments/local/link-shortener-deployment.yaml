@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: link-shortener-api
-        image: mcysrdckr/link_shortener/link-shortener-backend:latest # Kendi Docker imajınızla güncelleyin
+        image: link-shortener-backend:latest # Kendi Docker imajınızla güncelleyin
         ports:
         - containerPort: 80
         env:
