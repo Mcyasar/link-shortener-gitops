@@ -17,4 +17,4 @@ spec:
           service:
             name: link-shortener-api-service
             port:
-              number: 80
+              number: 5188 # .NET uygulamanızın expose ettiği port
