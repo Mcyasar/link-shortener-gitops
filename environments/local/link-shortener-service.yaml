@@ -8,6 +8,6 @@ spec:
     app: link-shortener-api
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 80
+      port: 5188 # Service'in dışarıya açtığı port, Ingress bunu kullanacak
+      targetPort: 5188 # Pod'un içindeki uygulamanın dinlediği port
   type: ClusterIP # Cluster içinde erişim için ClusterIP
