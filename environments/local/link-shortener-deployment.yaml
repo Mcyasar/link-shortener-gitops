@@ -61,6 +61,11 @@ spec:
             configMapKeyRef:
               name: link-shortener-config
               key: AWS__Region
+        - name: AWS__ServiceURL
+          valueFrom:
+            configMapKeyRef:
+              name: link-shortener-config
+              key: AWS__ServiceURL
         - name: AWS_SECRET_ACCESS_KEY
           value: "fakeSecretAccessKey"
         - name: AWS_ACCESS_KEY_ID
