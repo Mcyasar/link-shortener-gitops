@@ -8,6 +8,7 @@ resources:
   - link-shortener-deployment.yaml
   - link-shortener-service.yaml
   - link-shortener-ingress.yaml
+  - dynamodb-service.yaml
 
 images:
   - name: link-shortener-backend
