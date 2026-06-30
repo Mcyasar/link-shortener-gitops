@@ -19,11 +19,11 @@ spec:
       - name: link-shortener-api
         image: link-shortener-backend:latest # Kendi Docker imajınızla güncelleyin
         ports:
-        - containerPort: 5188 # 👈 .NET uygulamanızın asıl portu
+        - containerPort: 80 # 👈 .NET uygulamanızın asıl portu
           name: http
         env:
         - name: ASPNETCORE_URLS            # 👈 .NET'e portu dikte eden kritik değişken
-          value: "http://0.0.0.0:5188"     # 👈 Hem 5188 portunu açar hem de dış dünyaya (0.0.0.0) izin verir
+          value: "http://0.0.0.0:80"     # 👈 Hem 80 portunu açar hem de dış dünyaya (0.0.0.0) izin verir
         - name: ASPNETCORE_ENVIRONMENT
           value: Development # Kubernetes ortamında Development olarak çalıştırın
         - name: ConnectionStrings__PostgreSQL
@@ -73,11 +73,11 @@ spec:
         # Liveness ve Readiness Probları (Uygulamanızda /health endpoint'i olduğunu varsayar)
         livenessProbe:
           tcpSocket:                        # 👈 Aynı şekilde liveness probe için de TCP kontrolü
-            port: 5188
+            port: 80
           initialDelaySeconds: 10
           periodSeconds: 20
         readinessProbe:
           tcpSocket:                        # 👈 HTTP yerine tcpSocket kullanıyoruz
-            port: 5188                      # 👈 LaunchSettings'teki port değeri
+            port: 80                      # 👈 LaunchSettings'teki port değeri
           initialDelaySeconds: 10            # .NET ayağa kalkarken Kestrel'e tanınan süre
           periodSeconds: 10
