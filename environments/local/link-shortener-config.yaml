@@ -8,4 +8,4 @@ data:
   JwtSettings__Audience: LinkShortenerClient
   JwtSettings__ExpiryInMinutes: "60"
   AWS__Region: eu-central-1
-  AWS__ServiceURL: "http://external-dynamodb-svc:8000" # Yerel DynamoDB için
+  AWS__ServiceURL: "http://host.docker.internal:8000" # Yerel DynamoDB için
