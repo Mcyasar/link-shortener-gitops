@@ -5,6 +5,11 @@ metadata:
   namespace: link-shortener
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: / # Eğer uygulamanız root path'te çalışıyorsa
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "http://localhost:3000"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, PUT, DELETE, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
 spec:
   ingressClassName: nginx # Docker Desktop'ta genellikle 'nginx' veya 'traefik'
   rules:
