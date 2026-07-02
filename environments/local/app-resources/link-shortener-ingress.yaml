@@ -18,6 +18,13 @@ metadata:
     nginx.ingress.kubernetes.io/limit-connections: "100"
     nginx.ingress.kubernetes.io/limit-rps: "100"
 
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "30"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "900"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "900"
+    # Kestrel ve Ingress arasındaki Keep-Alive bağlantı sayısını artırır
+    nginx.ingress.kubernetes.io/upstream-keepalive-connections: "100"
+    nginx.ingress.kubernetes.io/upstream-keepalive-timeout: "60"
+
     nginx.ingress.kubernetes.io/configuration-snippet: |
       more_set_headers "X-Environment: Development-KinD";
       more_set_headers "X-Application-Version: 1.0.2-beta";

@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - link-shortener-namespace.yaml
+  - link-shortener-secrets.yaml
+  - link-shortener-config.yaml
+  - link-shortener-deployment.yaml
+  - link-shortener-service.yaml
+  - link-shortener-ingress.yaml
+  - dynamodb-service.yaml
+
+images:
+  - name: link-shortener-backend
+    newName: mcysrdckr/link_shortener
+    newTag: 77b82e45778e97d7dab795ab5a227084f59f87e7
