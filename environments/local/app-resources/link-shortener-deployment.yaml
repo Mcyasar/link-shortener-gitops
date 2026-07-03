@@ -25,7 +25,7 @@ spec:
         - name: ASPNETCORE_URLS            # 👈 .NET'e portu dikte eden kritik değişken
           value: "http://0.0.0.0:80"     # 👈 Hem 80 portunu açar hem de dış dünyaya (0.0.0.0) izin verir
         - name: ASPNETCORE_ENVIRONMENT
-          value: Development # Kubernetes ortamında Development olarak çalıştırın
+          value: Local # Kubernetes ortamında Development olarak çalıştırın
         - name: ConnectionStrings__PostgreSQL
           valueFrom:
             secretKeyRef:
