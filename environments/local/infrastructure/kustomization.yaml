@@ -3,5 +3,5 @@ kind: Kustomization
 
 resources:
   - jaeger.yaml
-  - prometheus.yaml
+  - telemetry-stack.yaml
   - grafana.yaml
