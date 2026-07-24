@@ -70,6 +70,26 @@ spec:
           value: "fakeSecretAccessKey"
         - name: AWS_ACCESS_KEY_ID
           value: "fakeMyKeyId"             # 👈 Tamamen rastgele bir değer olabilir
+        - name: RabbitMQ__Username
+          valueFrom:
+            secretKeyRef:
+              name: link-shortener-secrets
+              key: RABBITMQ_USERNAME
+        - name: RabbitMQ__Password
+          valueFrom:
+            secretKeyRef:
+              name: link-shortener-secrets
+              key: RABBITMQ_PASSWORD
+        - name: RabbitMQ__Host
+          valueFrom:
+            configMapKeyRef:
+              name: link-shortener-config
+              key: RABBITMQ__Host
+        - name: RabbitMQ__VirtualHost
+          valueFrom:
+            configMapKeyRef:
+              name: link-shortener-config
+              key: RABBITMQ__VirtualHost
         # Liveness ve Readiness Probları (Uygulamanızda /health endpoint'i olduğunu varsayar)
         livenessProbe:
           tcpSocket:                        # 👈 Aynı şekilde liveness probe için de TCP kontrolü

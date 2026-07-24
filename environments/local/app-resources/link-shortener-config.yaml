@@ -9,3 +9,5 @@ data:
   JwtSettings__ExpiryInMinutes: "60"
   AWS__Region: eu-central-1
   AWS__ServiceURL: "http://host.docker.internal:8000" # Yerel DynamoDB için
+  RABBITMQ__Host: localhost
+  RABBITMQ__VirtualHost: /
