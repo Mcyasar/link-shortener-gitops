@@ -4,10 +4,18 @@ metadata:
   name: link-shortener-config
   namespace: link-shortener
 data:
+  # .NET Runtime Ayarları
+  ASPNETCORE_URLS: "http://0.0.0.0:80"
+  ASPNETCORE_ENVIRONMENT: "Local"
+
+  # AWS / DynamoDB Ayarları
+  AWS__Region: "eu-west-1"
+  AWS__ServiceURL: "http://host.docker.internal:8000" # Yerel DynamoDB için
+  AWS_ACCESS_KEY_ID: "fakeMyKeyId"
+  AWS_SECRET_ACCESS_KEY: "fakeSecretAccessKey"
+
   JwtSettings__Issuer: LinkShortenerAPI
   JwtSettings__Audience: LinkShortenerClient
   JwtSettings__ExpiryInMinutes: "60"
-  AWS__Region: eu-central-1
-  AWS__ServiceURL: "http://host.docker.internal:8000" # Yerel DynamoDB için
-  RABBITMQ__Host: localhost
-  RABBITMQ__VirtualHost: /
+  RabbitMQ__Host: localhost
+  RabbitMQ__VirtualHost: /

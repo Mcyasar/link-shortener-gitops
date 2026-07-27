@@ -21,75 +21,18 @@ spec:
         ports:
         - containerPort: 80 # 👈 .NET uygulamanızın asıl portu
           name: http
+        
+        # --- ORTAK CONFIGMAP & SECRET (Tüm değişkenleri topluca çeker) ---
+        envFrom:
+        - configMapRef:
+            name: link-shortener-config
+        - secretRef:
+            name: link-shortener-secrets
+
         env:
-        - name: ASPNETCORE_URLS            # 👈 .NET'e portu dikte eden kritik değişken
-          value: "http://0.0.0.0:80"     # 👈 Hem 80 portunu açar hem de dış dünyaya (0.0.0.0) izin verir
-        - name: ASPNETCORE_ENVIRONMENT
-          value: Local # Kubernetes ortamında Development olarak çalıştırın
-        - name: ConnectionStrings__PostgreSQL
-          valueFrom:
-            secretKeyRef:
-              name: link-shortener-secrets
-              key: ConnectionStrings__PostgreSQL
-        - name: ConnectionStrings__Redis
-          valueFrom:
-            secretKeyRef:
-              name: link-shortener-secrets
-              key: ConnectionStrings__Redis
-        - name: JwtSettings__Secret
-          valueFrom:
-            secretKeyRef:
-              name: link-shortener-secrets
-              key: JwtSettings__Secret
-        - name: JwtSettings__Issuer
-          valueFrom:
-            configMapKeyRef:
-              name: link-shortener-config
-              key: JwtSettings__Issuer
-        - name: JwtSettings__Audience
-          valueFrom:
-            configMapKeyRef:
-              name: link-shortener-config
-              key: JwtSettings__Audience
-        - name: JwtSettings__ExpiryInMinutes
-          valueFrom:
-            configMapKeyRef:
-              name: link-shortener-config
-              key: JwtSettings__ExpiryInMinutes
-        - name: AWS__Region
-          valueFrom:
-            configMapKeyRef:
-              name: link-shortener-config
-              key: AWS__Region
-        - name: AWS__ServiceURL
-          valueFrom:
-            configMapKeyRef:
-              name: link-shortener-config
-              key: AWS__ServiceURL
-        - name: AWS_SECRET_ACCESS_KEY
-          value: "fakeSecretAccessKey"
-        - name: AWS_ACCESS_KEY_ID
-          value: "fakeMyKeyId"             # 👈 Tamamen rastgele bir değer olabilir
-        - name: RabbitMQ__Username
-          valueFrom:
-            secretKeyRef:
-              name: link-shortener-secrets
-              key: RABBITMQ_USERNAME
-        - name: RabbitMQ__Password
-          valueFrom:
-            secretKeyRef:
-              name: link-shortener-secrets
-              key: RABBITMQ_PASSWORD
-        - name: RabbitMQ__Host
-          valueFrom:
-            configMapKeyRef:
-              name: link-shortener-config
-              key: RABBITMQ__Host
-        - name: RabbitMQ__VirtualHost
-          valueFrom:
-            configMapKeyRef:
-              name: link-shortener-config
-              key: RABBITMQ__VirtualHost
+        - name: MassTransitWorkerEnabled
+          value: "false" # Consumer KAPALI
+
         # Liveness ve Readiness Probları (Uygulamanızda /health endpoint'i olduğunu varsayar)
         livenessProbe:
           tcpSocket:                        # 👈 Aynı şekilde liveness probe için de TCP kontrolü

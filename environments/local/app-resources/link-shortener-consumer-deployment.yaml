@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: link-shortener-consumer
+  namespace: link-shortener
+  labels:
+    app: link-shortener-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: link-shortener-consumer
+  template:
+    metadata:
+      labels:
+        app: link-shortener-consumer
+    spec:
+      containers:
+      - name: link-shortener-consumer
+        image: link-shortener-backend:latest # Kendi Docker imajınızla güncelleyin
+        ports:
+        - containerPort: 80 # 👈 .NET uygulamanızın asıl portu
+          name: http
+        
+        # --- ORTAK CONFIGMAP & SECRET (Tüm değişkenleri topluca çeker) ---
+        envFrom:
+        - configMapRef:
+            name: link-shortener-config
+        - secretRef:
+            name: link-shortener-secrets
+
+        env:
+        - name: MassTransitWorkerEnabled
+          value: "true" # Consumer AÇIK
+
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"

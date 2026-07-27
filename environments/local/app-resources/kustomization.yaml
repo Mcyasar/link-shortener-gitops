@@ -6,6 +6,7 @@ resources:
   - link-shortener-secrets.yaml
   - link-shortener-config.yaml
   - link-shortener-deployment.yaml
+  - link-shortener-consumer-deployment.yaml
   - link-shortener-service.yaml
   - link-shortener-ingress.yaml
   - dynamodb-service.yaml
