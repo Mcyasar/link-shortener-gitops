@@ -18,9 +18,6 @@ spec:
       containers:
       - name: link-shortener-consumer
         image: link-shortener-backend:latest # Kendi Docker imajınızla güncelleyin
-        ports:
-        - containerPort: 80 # 👈 .NET uygulamanızın asıl portu
-          name: http
         
         # --- ORTAK CONFIGMAP & SECRET (Tüm değişkenleri topluca çeker) ---
         envFrom:
