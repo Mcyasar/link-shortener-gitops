@@ -17,5 +17,5 @@ data:
   JwtSettings__Issuer: LinkShortenerAPI
   JwtSettings__Audience: LinkShortenerClient
   JwtSettings__ExpiryInMinutes: "60"
-  RabbitMQ__Host: localhost
+  RabbitMQ__Host: host.docker.internal
   RabbitMQ__VirtualHost: /
