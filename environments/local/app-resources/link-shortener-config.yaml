@@ -4,8 +4,6 @@ metadata:
   name: link-shortener-config
   namespace: link-shortener
 data:
-  MT_LICENSE: "OpenSource"  # Masstransit için lisans anahtarı (OpenSource veya Commercial)
-
   # .NET Runtime Ayarları
   ASPNETCORE_URLS: "http://0.0.0.0:80"
   ASPNETCORE_ENVIRONMENT: "Local"
