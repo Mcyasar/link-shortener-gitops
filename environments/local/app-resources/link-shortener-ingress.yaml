@@ -4,6 +4,16 @@ metadata:
   name: link-shortener-ingress
   namespace: link-shortener
   annotations:
+    # NGINX'in işleyebileceği max eşzamanlı TCP bağlantı havuzu
+    max-worker-connections: "65536"
+
+    # TCP Backlog limitini artırın (RST düşmelerini engeller)
+    sysctl-net-core-somaxconn: "4096"
+
+    # Boştaki bağlantıları hemen kapatmaması için
+    keep-alive-requests: "10000"
+    keep-alive-timeout: "75"
+
     nginx.ingress.kubernetes.io/enable-cors: "true"
     nginx.ingress.kubernetes.io/cors-allow-origin: "http://localhost:3000"
     nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, PUT, DELETE, OPTIONS"
