@@ -33,6 +33,14 @@ spec:
         - name: MassTransitWorkerEnabled
           value: "false" # Consumer KAPALI
 
+        resources:
+          requests:
+            cpu: "500m"      # Minimum 0.5 CPU çekirdeği garanti edilsin
+            memory: "256Mi"  # Minimum 256 MB RAM
+          limits:
+            cpu: "2"         # GC veya anlık sıçramalarda (burst) 2 çekirdeğe kadar izin verilsin
+            memory: "1Gi"    # Max 1 GB RAM (Out of Memory Kill engellemek için)
+
         # Liveness ve Readiness Probları (Uygulamanızda /health endpoint'i olduğunu varsayar)
         livenessProbe:
           tcpSocket:                        # 👈 Aynı şekilde liveness probe için de TCP kontrolü
