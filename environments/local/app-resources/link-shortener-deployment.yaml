@@ -6,7 +6,7 @@ metadata:
   labels:
     app: link-shortener-api
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: link-shortener-api
