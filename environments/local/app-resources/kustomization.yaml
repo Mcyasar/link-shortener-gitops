@@ -9,7 +9,6 @@ resources:
   - link-shortener-consumer-deployment.yaml
   - link-shortener-service.yaml
   - link-shortener-ingress.yaml
-  - dynamodb-service.yaml
   - link-shortener-external-service.yaml
 
 images:
