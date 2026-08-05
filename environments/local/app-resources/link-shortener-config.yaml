@@ -10,12 +10,12 @@ data:
 
   # AWS / DynamoDB Ayarları
   AWS__Region: "eu-west-1"
-  AWS__ServiceURL: "http://external-docker-host-svc:8000" # Yerel DynamoDB için
+  AWS__ServiceURL: "http://local-docker-host:8000" # Yerel DynamoDB için
   AWS_ACCESS_KEY_ID: "fakeMyKeyId"
   AWS_SECRET_ACCESS_KEY: "fakeSecretAccessKey"
 
   JwtSettings__Issuer: LinkShortenerAPI
   JwtSettings__Audience: LinkShortenerClient
   JwtSettings__ExpiryInMinutes: "60"
-  RabbitMQ__Host: external-docker-host-svc
+  RabbitMQ__Host: local-docker-host
   RabbitMQ__VirtualHost: /
