@@ -15,4 +15,4 @@ resources:
 images:
   - name: link-shortener-backend
     newName: mcysrdckr/link_shortener
-    newTag: 7104db632881bbc86c95b8efdb6f219115a0d0a2
+    newTag: 1d98cf100c7e2c95044c81a7a37dc26718fbe1d2
