@@ -10,6 +10,7 @@ resources:
   - link-shortener-service.yaml
   - link-shortener-ingress.yaml
   - dynamodb-service.yaml
+  - external-docker-host-svc.yaml
 
 images:
   - name: link-shortener-backend
