@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: local-docker-host
+  name: external-docker-host-svc
   namespace: link-shortener
 spec:
   type: ExternalName
