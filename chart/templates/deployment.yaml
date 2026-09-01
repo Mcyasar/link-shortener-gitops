@@ -30,7 +30,7 @@ spec:
           {{- if .Values.secretName }}
           envFrom:
             - secretRef:
-                name: {{ .Values.secretName }}
+                name: {{ include "linkshortener.fullname" . }}-secrets
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
