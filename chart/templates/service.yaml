@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "linkshortener.fullname" . }}-svc
+  namespace: "linkshortener-{{.Values.environment}}"
   labels:
     {{- include "linkshortener.labels" . | nindent 4 }}
 spec:

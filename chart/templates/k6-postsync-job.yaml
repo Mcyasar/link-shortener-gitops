@@ -3,6 +3,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ include "linkshortener.fullname" . }}-k6-test
+  namespace: "linkshortener-{{.Values.environment}}"
   labels:
     {{- include "linkshortener.labels" . | nindent 4 }}
   annotations:

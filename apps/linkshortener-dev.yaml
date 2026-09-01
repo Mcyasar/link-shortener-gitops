@@ -14,7 +14,7 @@ spec:
         - ../environments/values-dev.yaml # 👈 Development değerlerini okur
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: dev-environment     # 👈 Development Pod'larının kurulacağı namespace
+    namespace: linkshortener-dev     # 👈 Development Pod'larının kurulacağı namespace
   syncPolicy:
     automated:
       prune: true

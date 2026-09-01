@@ -14,7 +14,7 @@ spec:
         - ../environments/values-prod.yaml # 👈 Production değerlerini okur
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: prod-environment     # 👈 Production Pod'larının kurulacağı namespace
+    namespace: linkshortener-prod     # 👈 Production Pod'larının kurulacağı namespace
   syncPolicy:
     automated:
       prune: true
