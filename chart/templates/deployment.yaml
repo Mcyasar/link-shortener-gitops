@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "linkshortener.fullname" . }}
+  labels:
+    {{- include "linkshortener.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "linkshortener.name" . }}
+      env: {{ .Values.environment }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "linkshortener.name" . }}
+        env: {{ .Values.environment }}
+    spec:
+      containers:
+        - name: api
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 80
+              name: http
+          envFrom:
+            - configMapRef:
+                name: {{ include "linkshortener.fullname" . }}-config
+          # Secret varsa bağlayabilirsiniz:
+          {{- if .Values.secretName }}
+          envFrom:
+            - secretRef:
+                name: {{ .Values.secretName }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

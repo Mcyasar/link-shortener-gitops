@@ -1,0 +1,36 @@
+{{- if .Values.k6Test.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "linkshortener.fullname" . }}-k6-test
+  labels:
+    {{- include "linkshortener.labels" . | nindent 4 }}
+  annotations:
+    # ArgoCD Sync bittikten sonra bu Job çalışacak
+    argocd.argoproj.in/hook: PostSync
+    # Başarılı olduğunda veya yeni test geldiğinde eski Job'ı temizler
+    argocd.argoproj.in/hook-delete-policy: HookSucceeded, BeforeHookCreation
+spec:
+  template:
+    metadata:
+      name: k6-runner
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: k6
+          image: grafana/k6:latest
+          command: ["k6", "run", "/scripts/load-test-dynamic.js"]
+          env:
+            - name: BASE_URL
+              value: "http://{{ include "linkshortener.fullname" . }}-svc:{{ .Values.service.port }}"
+            - name: CI
+              value: "true"
+          volumeMounts:
+            - name: test-script-volume
+              mountPath: /scripts
+      volumes:
+        - name: test-script-volume
+          configMap:
+            name: {{ .Values.k6Test.scriptConfigMapName }}
+  backoffLimit: 0
+{{- end }}

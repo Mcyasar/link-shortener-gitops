@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: linkshortener-dev          # 👈 Argo CD arayüzünde görünecek benzersiz isim
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/Mcyasar/link-shortener-gitops.git'
+    targetRevision: HEAD
+    path: chart
+    helm:
+      valueFiles:
+        - ../environments/values-dev.yaml # 👈 Development değerlerini okur
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: dev-environment     # 👈 Development Pod'larının kurulacağı namespace
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

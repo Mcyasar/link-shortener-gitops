@@ -1,0 +1,25 @@
+environment: prod
+dotnetEnv: Production
+isWorkerEnabled: true
+replicaCount: 5
+
+image:
+  repository: mydockerhub/linkshortener-api
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+# PROD ortamında PostSync k6 Yük Testi PASİF (Prod'da yük testi fırlatmıyoruz)
+k6Test:
+  enabled: false
+
+resources:
+  requests:
+    cpu: 500m
+    memory: 512Mi
+  limits:
+    cpu: "2"
+    memory: 2Gi

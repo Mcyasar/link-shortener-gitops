@@ -1,0 +1,23 @@
+environment: dev
+dotnetEnv: Development
+isWorkerEnabled: true
+replicaCount: 1
+
+image:
+  repository: mydockerhub/linkshortener-api
+  tag: latest # GitHub Actions buradaki tag'i v1.2.3 olarak güncelleyecek
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 80
+
+# TEST ortamında PostSync k6 Yük Testi AKTİF
+k6Test:
+  enabled: true
+  scriptConfigMapName: k6-test-script-configmap
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi

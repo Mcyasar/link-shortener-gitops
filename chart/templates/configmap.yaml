@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "linkshortener.fullname" . }}-config
+  labels:
+    {{- include "linkshortener.labels" . | nindent 4 }}
+data:
+  ASPNETCORE_ENVIRONMENT: {{ .Values.dotnetEnv | quote }}
+  ASPNETCORE_URLS: "http://0.0.0.0:80"
+
+  AWS__Region: "eu-west-1"
+  AWS__ServiceURL: "http://{{ .Values.environment }}-docker-host:8000"
+  AWS_ACCESS_KEY_ID: "fakeMyKeyId"
+  AWS_SECRET_ACCESS_KEY: "fakeSecretAccessKey"
+
+  RABBITMQ_HOST: "{{ .Values.environment }}-docker-host"
+  RABBITMQ_VIRTUAL_HOST: "/"
+
+  IS_WORKER_ENABLED: {{ default false .Values.isWorkerEnabled | quote }}
+
+  JwtSettings__Issuer: "LinkShortenerAPI"
+  JwtSettings__Audience: "LinkShortenerClient"
+  JwtSettings__ExpiryInMinutes: "60"
