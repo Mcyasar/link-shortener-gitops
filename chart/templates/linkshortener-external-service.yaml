@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: local-docker-host
+  name: "{{.Values.environment}}-docker-host"
   namespace: "linkshortener-{{.Values.environment}}"
 spec:
   type: ExternalName
