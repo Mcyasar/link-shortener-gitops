@@ -4,8 +4,8 @@ isWorkerEnabled: true
 replicaCount: 1
 
 image:
-  repository: mydockerhub/linkshortener-api
-  tag: latest # GitHub Actions buradaki tag'i v1.2.3 olarak güncelleyecek
+  repository: mcysrdckr/link_shortener
+  tag: d814c57e7704aff646243b269fbccda00e389454 # GitHub Actions buradaki tag'i v1.2.3 olarak güncelleyecek
   pullPolicy: Always
 
 service:

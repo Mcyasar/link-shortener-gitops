@@ -4,8 +4,8 @@ isWorkerEnabled: true
 replicaCount: 5
 
 image:
-  repository: mydockerhub/linkshortener-api
-  tag: latest
+  repository: mcysrdckr/link_shortener
+  tag: d814c57e7704aff646243b269fbccda00e389454
   pullPolicy: IfNotPresent
 
 service:
