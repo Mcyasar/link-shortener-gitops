@@ -14,8 +14,8 @@ data:
   AWS_ACCESS_KEY_ID: "fakeMyKeyId"
   AWS_SECRET_ACCESS_KEY: "fakeSecretAccessKey"
 
-  RABBITMQ_HOST: "{{ .Values.environment }}-docker-host"
-  RABBITMQ_VIRTUAL_HOST: "/"
+  RabbitMQ__Host: "{{ .Values.environment }}-docker-host"
+  RabbitMQ__VirtualHost: "/"
 
   IS_WORKER_ENABLED: {{ default false .Values.isWorkerEnabled | quote }}
 
