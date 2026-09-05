@@ -12,6 +12,15 @@
 {{- end }}
 {{- end }}
 
+{{/* Dynamic env definition */}}
+{{- define "linkshortener.env" -}}
+{{- if eq .Values.environment eq "dev" -}}
+{{- "development" | trunc 63 | trimSuffix "-" }}
+{{- else }}
+{{- .Values.environment | trunc 63 | trimSuffix "-" }}
+{{- end }}
+{{- end }}
+
 {{/* Common Labels */}}
 {{- define "linkshortener.labels" -}}
 helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}

@@ -46,7 +46,7 @@ metadata:
 spec:
   ingressClassName: nginx # Docker Desktop'ta genellikle 'nginx' veya 'traefik'
   rules:
-  - host: "linkshortener.local.{{.Values.environment}}" # Kendi istediğiniz bir hostname belirleyin
+  - host: "linkshortener.{{linkshortener.env}}" # Kendi istediğiniz bir hostname belirleyin
     http:
       paths:
       - path: /
