@@ -53,6 +53,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: link-shortener-api-service
+            name: "linkshortener-{{.Values.environment}}-svc"
             port:
               number: 80 # .NET uygulamanızın expose ettiği port
