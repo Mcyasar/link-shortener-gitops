@@ -27,11 +27,7 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ include "linkshortener.fullname" . }}-config
-          # Secret varsa bağlayabilirsiniz:
-          {{- if .Values.secretName }}
-          envFrom:
             - secretRef:
                 name: {{ include "linkshortener.fullname" . }}-secrets
-          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
