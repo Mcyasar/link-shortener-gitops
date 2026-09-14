@@ -16,6 +16,7 @@ service:
 k6Test:
   enabled: true
   scriptConfigMapName: k6-test-script-configmap
+  shortCode: "iZr6N9c"
 
 resources:
   requests:

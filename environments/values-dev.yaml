@@ -16,6 +16,24 @@ service:
 k6Test:
   enabled: true
   scriptConfigMapName: k6-test-script-configmap
+  shortCode: "iZr6N9c"
+  script: |
+    import http from 'k6/http';
+    import { check, sleep } from 'k6';
+
+    export const options = {
+      vus: 5,
+      duration: '10s',
+    };
+
+    export default function () {
+      // Kubernetes içi Service üzerinden veya Ingress host adresi üzerinden erişim
+      const res = http.get('http://{{ include "linkshortener.fullname" . }}-svc/api/health');
+      check(res, {
+        'status is 200': (r) => r.status === 200,
+      });
+      sleep(1);
+    }
 
 resources:
   requests:

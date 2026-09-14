@@ -1,37 +1,43 @@
-{{- if .Values.k6Test.enabled }}
+{{- if and .Values.k6Test .Values.k6Test.enabled }}
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ include "linkshortener.fullname" . }}-k6-test
-  namespace: "linkshortener-{{.Values.environment}}"
+  name: {{ include "linkshortener.fullname" . }}-k6-job
   labels:
     {{- include "linkshortener.labels" . | nindent 4 }}
   annotations:
-    # ArgoCD Sync bittikten sonra bu Job çalışacak
-    argocd.argoproj.in/hook: PostSync
-    # Başarılı olduğunda veya yeni test geldiğinde eski Job'ı temizler
-    argocd.argoproj.in/hook-delete-policy: HookSucceeded, BeforeHookCreation
+    # Argo CD ana uygulamayı senkronize ettikten sonra testi başlatır
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
 spec:
+  # Test bittiğinde Job ve Pod'un kaç saniye sonra silineceğini belirler (temizlik için)
+  ttlSecondsAfterFinished: 300
+  backoffLimit: 0
   template:
     metadata:
-      name: k6-runner
+      name: {{ include "linkshortener.fullname" . }}-k6-pod
+      labels:
+        {{- include "linkshortener.labels" . | nindent 8 }}
     spec:
       restartPolicy: Never
       containers:
         - name: k6
           image: grafana/k6:latest
-          command: ["k6", "run", "/scripts/load-test-dynamic.js"]
+          command: ["k6", "run", "/tests/load-test.js"]
           env:
-            - name: BASE_URL
-              value: "http://{{ include "linkshortener.fullname" . }}-svc:{{ .Values.service.port }}"
-            - name: CI
-              value: "true"
+            # Cluster içi Kubernetes Service DNS'i üzerinden doğrudan iletişim
+            - name: TARGET_BASE_URL
+              value: "http://{{ include "linkshortener.fullname" . }}-svc:80"
+            - name: TEST_SHORT_CODE
+              value: {{ .Values.k6Test.shortCode | default "iZr6N9c" | quote }}
+            # İsteğe bağlı Ingress üzerinden test etmek isterseniz:
+            - name: TARGET_HOST_HEADER
+              value: "linkshortener.{{ .Values.environment }}"
           volumeMounts:
-            - name: test-script-volume
-              mountPath: /scripts
+            - name: k6-script-volume
+              mountPath: /tests
       volumes:
-        - name: test-script-volume
+        - name: k6-script-volume
           configMap:
-            name: {{ .Values.k6Test.scriptConfigMapName }}
-  backoffLimit: 0
+            name: {{ include "linkshortener.fullname" . }}-k6-script
 {{- end }}

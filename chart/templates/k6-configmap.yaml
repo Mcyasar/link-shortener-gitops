@@ -1,0 +1,15 @@
+{{- if and .Values.k6Test .Values.k6Test.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "linkshortener.fullname" . }}-k6-script
+  labels:
+    {{- include "linkshortener.labels" . | nindent 4 }}
+  annotations:
+    # Argo CD hook: Job çalışmadan önce ConfigMap'in hazır olmasını sağlar
+    argocd.argoproj.io/hook: PreSync,Sync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+data:
+  load-test.js: |-
+{{ .Files.Get "tests/load-test.js" | indent 4 }}
+{{- end }}
