@@ -2,22 +2,18 @@ environment: test
 dotnetEnv: Test
 isWorkerEnabled: true
 replicaCount: 2
-
 image:
   repository: mcysrdckr/link_shortener
-  tag: d814c57e7704aff646243b269fbccda00e389454 # GitHub Actions buradaki tag'i v1.2.3 olarak güncelleyecek
+  tag: 763203a6c362cc7e990252489b637f766a48cc50 # GitHub Actions buradaki tag'i v1.2.3 olarak güncelleyecek
   pullPolicy: Always
-
 service:
   type: ClusterIP
   port: 80
-
 # TEST ortamında PostSync k6 Yük Testi AKTİF
 k6Test:
   enabled: true
   scriptConfigMapName: k6-test-script-configmap
   shortCode: "iZr6N9c"
-
 resources:
   requests:
     cpu: 100m
