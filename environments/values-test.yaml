@@ -4,7 +4,7 @@ isWorkerEnabled: true
 replicaCount: 2
 image:
   repository: mcysrdckr/link_shortener
-  tag: a8dba519714e2db5c4c343d65d84e2c8c339c3e2 # GitHub Actions buradaki tag'i v1.2.3 olarak güncelleyecek
+  tag: e1d5294f65b1f1948ca6ee0e9320f4dcccae01bb # GitHub Actions buradaki tag'i v1.2.3 olarak güncelleyecek
   pullPolicy: Always
 service:
   type: ClusterIP
