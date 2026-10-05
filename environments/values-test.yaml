@@ -4,7 +4,7 @@ isWorkerEnabled: true
 replicaCount: 2
 image:
   repository: mcysrdckr/link_shortener
-  tag: 75f03d6c2c81e67a179b9e3b2825caef56e668c7 # GitHub Actions buradaki tag'i v1.2.3 olarak güncelleyecek
+  tag: ec982206501edd170a818d54268236f672cbe7eb # GitHub Actions buradaki tag'i v1.2.3 olarak güncelleyecek
   pullPolicy: Always
 service:
   type: ClusterIP
@@ -19,5 +19,5 @@ resources:
     cpu: 250m
     memory: 256Mi
   limits:
-    cpu: 1000m       # 1 tam çekirdeğe kadar burst yapabilsin
+    cpu: 1000m # 1 tam çekirdeğe kadar burst yapabilsin
     memory: 512Mi
